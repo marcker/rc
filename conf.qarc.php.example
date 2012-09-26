@@ -1,0 +1,20 @@
+<?php
+/**
+ * Grooveshark Standard Library
+ * Defines global system constants and frequently-used
+ * functions.
+ *
+ * @author Skyler Slade <skyler.slade@escapemg.com>
+ * @copyright 2008 Escape Media Group Inc.
+ * @package lib
+ */
+date_default_timezone_set('America/New_York');
+ini_set('memory_limit', '64M');
+ini_set("session.cookie_domain", ".ty.svn");
+ini_set('error_log', '/var/log/php/htmlshark_error_log');
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors','On');
+
+define('QARC_PANDACAVE_ENDPOINT', "YOUR URL ENDPOINT HERE");
+
+?>
