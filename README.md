@@ -1,4 +1,4 @@
-== QARC
+# QARC
 
 This script serves to keep the directory your webserver is serving
 at the most recent commit to your repo.
@@ -6,7 +6,7 @@ at the most recent commit to your repo.
 At Grooveshark on the QA team, we use this to make available the
 most recent version of our app for testing.
 
-== Getting Started
+## Getting Started
 
 1. Ensure you've got a working webserver going with support for PHP and Gearman
 
