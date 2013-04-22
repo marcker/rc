@@ -18,29 +18,31 @@ $gm = new GearmanWorker();
 //if (defined('LOCAL') && LOCAL) {
     $gm->addServer();
 //}
-$pandaCave = QARC_PANDACAVE_ENDPOINT; 
+$pandaCave = QARC_PANDACAVE_ENDPOINT;
 $FENs = array();
 $fp = fopen($pandaCave, 'rb', false);
 $data = json_decode(fread($fp, 102400), true);
+
 if (count($data) == 0) {
     echo "No servers found in FEN pool from Panda Cave.";
     exit;
 }
+
 foreach ($data as $server) {
-    $gm->addServer($server['InternalIP']);
+    $gm -> addServer($server['InternalIP']);
 }
 
 $args = null;
-
 $stop = false;
+
 global $stop;
 
-$gm->addFunction("qarcGithubHook", "qarcGithubHook", $args);
+$gm -> addFunction("qarcGithubHook", "qarcGithubHook", $args);
 
 echo "Added the function to gearman\n";
 
-while (!$stop && ($gm->work() || $gm->returnCode() == GEARMAN_TIMEOUT)) {
-    switch ($gm->returnCode()) {
+while (!$stop && ($gm -> work() || $gm -> returnCode() == GEARMAN_TIMEOUT)) {
+    switch ($gm -> returnCode()) {
         case GEARMAN_SUCCESS:
             echo "Gearman Success\n";
             break;
@@ -48,16 +50,15 @@ while (!$stop && ($gm->work() || $gm->returnCode() == GEARMAN_TIMEOUT)) {
             echo "Gearman Timeout\n";
             break;
         default:
-            echo "ERROR RET: " . $gmc->returnCode() . "\n";
+            echo "ERROR RET: " . $gmc -> returnCode() . "\n";
             exit;
     }
 }
 
 echo "Quitting\n";
 
-function qarcGithubHook($job, $args)
-{
-    $jobInfo = json_decode($job->workload(), true);
+function qarcGithubHook($job, $args) {
+    $jobInfo = json_decode($job -> workload(), true);
     $after = (string)$jobInfo['after'];
     $ref = (string)$jobInfo['ref'];
 
